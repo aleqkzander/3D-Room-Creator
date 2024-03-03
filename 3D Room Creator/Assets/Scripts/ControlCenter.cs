@@ -43,16 +43,16 @@ public class ControlCenter : MonoBehaviour
         /*
          * Main menu buttons
          */
-        MenuButtons.StartListenerCreateNewRoom(ButtonOpenEditorInterface, MainMenuInterface);
-        MenuButtons.StartListenerSaveCurrentRoom(ButtonSaveCurrentRoom);
-        MenuButtons.StartListenerLoadPreviousRoom(ButtonLoadPreviousRoom, MainMenuInterface);
-        MenuButtons.StartListenerDeleteCurrentRoom(ButtonDeleteCurrentRoom);
+        ButtonListener.StartListenerCreateNewRoom(ButtonOpenEditorInterface, MainMenuInterface);
+        ButtonListener.StartListenerSaveCurrentRoom(ButtonSaveCurrentRoom);
+        ButtonListener.StartListenerLoadPreviousRoom(ButtonLoadPreviousRoom, MainMenuInterface);
+        ButtonListener.StartListenerDeleteCurrentRoom(ButtonDeleteCurrentRoom);
 
         /*
          * Creation menu buttons
          */
-        MenuButtons.StartListenerAddAnotherRoom(ButtonAddAnotherRoom);
-        MenuButtons.StartListenerChangeViewButton(ButtonChangeView);
-        MenuButtons.StartListenerBackHome(ButtonBackHome, MainMenuInterface);
+        ButtonListener.StartListenerAddAnotherRoom(ButtonAddAnotherRoom);
+        ButtonListener.StartListenerChangeViewButton(ButtonChangeView);
+        ButtonListener.StartListenerBackHome(ButtonBackHome, MainMenuInterface);
     }
 }
