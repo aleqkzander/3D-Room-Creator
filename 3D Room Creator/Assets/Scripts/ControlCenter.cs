@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,13 +7,22 @@ public class ControlCenter : MonoBehaviour
 {
     public static ControlCenter Instance { get; private set; }
 
-    [Header("Main menu interface")]
+    [Header("MainMenuInterface")]
     [Space(5)]
     public GameObject MainMenuInterface;
-    public Button ButtonCreateNewRoom;
+
+    [Header("MainMenuButtons")]
+    [Space(5)]
+    public Button ButtonOpenEditorInterface;
     public Button ButtonSaveCurrentRoom;
     public Button ButtonLoadPreviousRoom;
     public Button ButtonDeleteCurrentRoom;
+
+    [Header("CreationMenuButtons")]
+    [Space(5)]
+    public Button ButtonAddAnotherRoom;
+    public ChangeViewButton ButtonChangeView;
+    public Button ButtonBackHome;
 
     private void Awake()
     {
@@ -29,9 +40,19 @@ public class ControlCenter : MonoBehaviour
 
     private void StartListenerForReferencedButtons()
     {
-        MenuButtons.StartListenerCreateNewRoom(ButtonCreateNewRoom, MainMenuInterface);
+        /*
+         * Main menu buttons
+         */
+        MenuButtons.StartListenerCreateNewRoom(ButtonOpenEditorInterface, MainMenuInterface);
         MenuButtons.StartListenerSaveCurrentRoom(ButtonSaveCurrentRoom);
         MenuButtons.StartListenerLoadPreviousRoom(ButtonLoadPreviousRoom, MainMenuInterface);
         MenuButtons.StartListenerDeleteCurrentRoom(ButtonDeleteCurrentRoom);
+
+        /*
+         * Creation menu buttons
+         */
+        MenuButtons.StartListenerAddAnotherRoom(ButtonAddAnotherRoom);
+        MenuButtons.StartListenerChangeViewButton(ButtonChangeView);
+        MenuButtons.StartListenerBackHome(ButtonBackHome, MainMenuInterface);
     }
 }

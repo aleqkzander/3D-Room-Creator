@@ -36,4 +36,28 @@ public class MenuButtons
             throw new System.NotImplementedException();
         });
     }
+
+    public static void StartListenerAddAnotherRoom(Button button)
+    {
+        button.onClick.AddListener(() =>
+        {
+            throw new System.NotImplementedException();
+        });
+    }
+
+    public static void StartListenerChangeViewButton(ChangeViewButton changeviewbutton)
+    {
+        changeviewbutton.Button.onClick.AddListener(() =>
+        {
+            changeviewbutton.ChangeState();
+        });
+    }
+
+    public static void StartListenerBackHome(Button button, GameObject mainmenuinterface)
+    {
+        button.onClick.AddListener(() =>
+        {
+            mainmenuinterface.SetActive(true);
+        });
+    }
 }
