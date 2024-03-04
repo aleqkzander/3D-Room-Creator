@@ -33,6 +33,7 @@ public class PlacementSystem : MonoBehaviour
         Debug.Log("Object hit: " + objectHit.name);
 
         if (!objectHit.CompareTag("Placeable")) return;
-        Destroy(objectHit);
+
+        ObjectPlacerMaster.DeleteBasicCube(objectHit);  
     }
 }

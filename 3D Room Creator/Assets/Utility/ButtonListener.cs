@@ -13,18 +13,19 @@ public class ButtonListener
         });
     }
 
-    public static void StartListenerSaveCurrentRoom(Button button)
+    public static void StartListenerSaveCurrentRoom(Button button, ObjectPlacer objectplacer)
     {
         button.onClick.AddListener(() =>
         {
-            throw new System.NotImplementedException();
+            objectplacer.SaveObjects();
         });
     }
 
-    public static void StartListenerLoadPreviousRoom(Button button, GameObject mainmenuinterface)
+    public static void StartListenerLoadPreviousRoom(Button button, GameObject mainmenuinterface, ObjectPlacer objectplacer)
     {
         button.onClick.AddListener(() =>
         {
+            objectplacer.LoadObjects();
             mainmenuinterface.SetActive(false);
         });
     }

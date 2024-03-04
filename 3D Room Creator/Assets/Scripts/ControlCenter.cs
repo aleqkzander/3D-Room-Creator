@@ -24,6 +24,10 @@ public class ControlCenter : MonoBehaviour
     public ChangeViewButton ButtonChangeView;
     public Button ButtonBackHome;
 
+    [Header("ObjectPlacer")]
+    [Space(5)]
+    public ObjectPlacer ObjectPlacer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,7 +36,6 @@ public class ControlCenter : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
             Instance = this;
             StartListenerForReferencedButtons();
         }
@@ -44,8 +47,8 @@ public class ControlCenter : MonoBehaviour
          * Main menu buttons
          */
         ButtonListener.StartListenerCreateNewRoom(ButtonOpenEditorInterface, MainMenuInterface);
-        ButtonListener.StartListenerSaveCurrentRoom(ButtonSaveCurrentRoom);
-        ButtonListener.StartListenerLoadPreviousRoom(ButtonLoadPreviousRoom, MainMenuInterface);
+        ButtonListener.StartListenerSaveCurrentRoom(ButtonSaveCurrentRoom, ObjectPlacer);
+        ButtonListener.StartListenerLoadPreviousRoom(ButtonLoadPreviousRoom, MainMenuInterface, ObjectPlacer);
         ButtonListener.StartListenerDeleteCurrentRoom(ButtonDeleteCurrentRoom);
 
         /*
