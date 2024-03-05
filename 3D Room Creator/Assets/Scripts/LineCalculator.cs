@@ -7,14 +7,14 @@ public class LineCalculator : MonoBehaviour
 
     public int DrawLines(List<GameObject> spawnedObjectsList)
     {
+        // reset all positions
+        LineRenderer.positionCount = 0;
+
         if (spawnedObjectsList.Count < 2)
         {
             Debug.Log("You need to add at least 2 elements to draw lines.");
             return 0;
         }
-
-        // reset all positions
-        LineRenderer.positionCount = 0;
 
         foreach (var spawnedObject in spawnedObjectsList)
         {
@@ -26,7 +26,7 @@ public class LineCalculator : MonoBehaviour
 
             // create a postion based on the postion data list
             Vector3 linePosition = 
-                new(spawnedObject.transform.position.x - 0.5f, spawnedObject.transform.position.y + 0.5f, spawnedObject.transform.position.z - 0.5f);
+                new(spawnedObject.transform.position.x, spawnedObject.transform.position.y + 0.5f, spawnedObject.transform.position.z);
 
             // set the line render position data for current index
             LineRenderer.SetPosition(currentPositionIndex, linePosition);

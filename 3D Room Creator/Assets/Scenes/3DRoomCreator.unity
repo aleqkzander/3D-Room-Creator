@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 28858197}
   - component: {fileID: 28858198}
   m_Layer: 0
-  m_Name: ObjectPlacerMaster
+  m_Name: ObjectPlacer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1110549792}
-  m_Father: {fileID: 1024875925}
+  m_Father: {fileID: 984975283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &345241644
 GameObject:
@@ -1170,9 +1170,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 631019314}
-  - component: {fileID: 631019315}
+  - component: {fileID: 631019316}
   m_Layer: 0
-  m_Name: PrewviewPlayer
+  m_Name: PreviewPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1194,7 +1194,7 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 984975283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &631019315
+--- !u!114 &631019316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1203,11 +1203,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 631019313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409118c844164ec49a80267dcc23d9bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 25f61f131a3fef04093ea3b7c2abed71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PreviewCamera: {fileID: 963194227}
-  MoveSpeed: 0.1
+  MoveSpeed: 5
+  SmoothInterpolation: 0.1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,9 +1750,10 @@ Transform:
   - {fileID: 631019314}
   - {fileID: 969682342}
   - {fileID: 1786257498}
+  - {fileID: 327997783}
   - {fileID: 1024875925}
-  - {fileID: 2020964053}
   - {fileID: 8667559415273386040}
+  - {fileID: 2020964053}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1024875924
@@ -1784,7 +1786,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 86489437}
-  - {fileID: 327997783}
   m_Father: {fileID: 984975283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1037856742
@@ -3042,7 +3043,7 @@ MonoBehaviour:
   Grid: {fileID: 486183035}
   GridPosition: {fileID: 327997782}
   PreviewPlayer: {fileID: 1451321763}
-  ObjectPlacerMaster: {fileID: 28858198}
+  ObjectPlacer: {fileID: 28858198}
 --- !u!114 &1451321761
 MonoBehaviour:
   m_ObjectHideFlags: 0

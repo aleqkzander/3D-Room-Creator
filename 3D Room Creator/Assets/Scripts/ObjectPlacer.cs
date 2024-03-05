@@ -14,8 +14,10 @@ public class ObjectPlacer : MonoBehaviour
     {
         Vector3 spawnPosition = new(position.x, position.y + 0.5f, position.z);
         Quaternion spawnRotation = Quaternion.Euler(0, 180, 0);
+
         GameObject spawnedCube = Instantiate(BasicCubePrefab, spawnPosition, spawnRotation);
         spawnedCube.transform.SetParent(ObjectPlacerMaster.transform);
+
         SpawnedObjects.Add(spawnedCube);
     }
 

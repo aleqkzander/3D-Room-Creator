@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,19 +7,32 @@ public class PlacementSystem : MonoBehaviour
     public Grid Grid;
     public GameObject GridPosition;
     public PreviewPlayer PreviewPlayer;
-    public ObjectPlacer ObjectPlacerMaster;
+    public ObjectPlacer ObjectPlacer;
+    private readonly List<Vector3Int> _occupiedPositions = new();
 
     private void Update()
     {
-        // don't execute when we our mouse is over an UI element
+        // Don't execute when our mouse is over a UI element
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         Vector3 mousePosition = MouseTracker.GetSelectedMapPosition();
         Vector3Int gridPosition = Grid.WorldToCell(mousePosition);
         GridPosition.transform.position = Grid.CellToWorld(gridPosition);
 
-        if (Input.GetMouseButtonDown(0)) ObjectPlacerMaster.CreateBasicCube(gridPosition);
+        if (Input.GetMouseButtonDown(0)) PlaceObject(gridPosition);
         if (Input.GetMouseButtonDown(1)) DestroyObjectUnderMyMouse();
+    }
+
+    private void PlaceObject(Vector3Int position)
+    {
+        if (_occupiedPositions.Contains(position))
+        {
+            Debug.Log("Position already occupied!");
+            return;
+        }
+
+        ObjectPlacer.CreateBasicCube(position);
+        _occupiedPositions.Add(position);
     }
 
     private void DestroyObjectUnderMyMouse()
@@ -27,6 +41,6 @@ public class PlacementSystem : MonoBehaviour
         if (!Physics.Raycast(ray, out RaycastHit hit)) return;
         GameObject objectHit = hit.transform.gameObject;
         if (objectHit == null) return; if (!objectHit.CompareTag("Placeable")) return;
-        ObjectPlacerMaster.DeleteBasicCube(objectHit);  
+        ObjectPlacer.DeleteBasicCube(objectHit);  
     }
 }
