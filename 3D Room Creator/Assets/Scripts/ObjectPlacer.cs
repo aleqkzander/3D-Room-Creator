@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ObjectPlacer : MonoBehaviour
@@ -6,11 +7,14 @@ public class ObjectPlacer : MonoBehaviour
     public GameObject ObjectPlacerMaster;
     public GameObject BasicCubePrefab;
     public List<GameObject> SpawnedObjects;
-
+    public LineCalculator LineCalculator;
+    public TMP_Text LineLengthText;
+ 
     public void CreateBasicCube(Vector3 position)
     {
         Vector3 spawnPosition = new(position.x, position.y + 0.5f, position.z);
-        GameObject spawnedCube = Instantiate(BasicCubePrefab, spawnPosition, Quaternion.identity);
+        Quaternion spawnRotation = Quaternion.Euler(0, 180, 0);
+        GameObject spawnedCube = Instantiate(BasicCubePrefab, spawnPosition, spawnRotation);
         spawnedCube.transform.SetParent(ObjectPlacerMaster.transform);
         SpawnedObjects.Add(spawnedCube);
     }
@@ -19,6 +23,22 @@ public class ObjectPlacer : MonoBehaviour
     {
         SpawnedObjects.Remove(gameObject);
         Destroy(gameObject);
+    }
+
+    public void DrawLines()
+    {
+        int lineLength = LineCalculator.DrawLines(SpawnedObjects);
+
+        if (lineLength == 0)
+        {
+            LineLengthText.gameObject.SetActive(false);
+        }
+        else
+        { 
+            LineLengthText.gameObject.SetActive(true); 
+        }
+
+        LineLengthText.text = $"Lenght {lineLength}m";
     }
 
     public void SaveObjects()
@@ -48,9 +68,9 @@ public class ObjectPlacer : MonoBehaviour
         }
 
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonPositionData);
-        List<PositionData> positionData = saveData.PositionData;
+        List<PositionData> positiondata = saveData.PositionData;
 
-        foreach (PositionData savedPosition in positionData)
+        foreach (PositionData savedPosition in positiondata)
         {
             Vector3 position = new(savedPosition.x, savedPosition.y, savedPosition.z);
             GameObject savedObject = Instantiate(BasicCubePrefab, position, Quaternion.identity);

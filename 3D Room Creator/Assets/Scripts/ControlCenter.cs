@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ public class ControlCenter : MonoBehaviour
 
     [Header("CreationMenuButtons")]
     [Space(5)]
-    public Button ButtonAddAnotherRoom;
+    public Button ButtonCreateLines;
     public ChangeViewButton ButtonChangeView;
     public Button ButtonBackHome;
 
@@ -54,7 +55,7 @@ public class ControlCenter : MonoBehaviour
         /*
          * Creation menu buttons
          */
-        ButtonListener.StartListenerAddAnotherRoom(ButtonAddAnotherRoom);
+        ButtonListener.StartListenerCreateLines(ButtonCreateLines, ObjectPlacer);
         ButtonListener.StartListenerChangeViewButton(ButtonChangeView);
         ButtonListener.StartListenerBackHome(ButtonBackHome, MainMenuInterface);
     }

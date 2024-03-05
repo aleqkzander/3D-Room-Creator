@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,12 +26,7 @@ public class PlacementSystem : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out RaycastHit hit)) return;
         GameObject objectHit = hit.transform.gameObject;
-
-        if (objectHit == null) return;
-        Debug.Log("Object hit: " + objectHit.name);
-
-        if (!objectHit.CompareTag("Placeable")) return;
-
+        if (objectHit == null) return; if (!objectHit.CompareTag("Placeable")) return;
         ObjectPlacerMaster.DeleteBasicCube(objectHit);  
     }
 }

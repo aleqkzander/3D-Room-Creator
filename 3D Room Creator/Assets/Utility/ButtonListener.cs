@@ -38,11 +38,11 @@ public class ButtonListener
         });
     }
 
-    public static void StartListenerAddAnotherRoom(Button button)
+    public static void StartListenerCreateLines(Button button, ObjectPlacer objectplacer)
     {
         button.onClick.AddListener(() =>
         {
-            throw new System.NotImplementedException();
+            objectplacer.DrawLines();
         });
     }
 
