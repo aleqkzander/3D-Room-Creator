@@ -1771,7 +1771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1024875925
 Transform:
   m_ObjectHideFlags: 0
@@ -3044,6 +3044,7 @@ MonoBehaviour:
   GridPosition: {fileID: 327997782}
   PreviewPlayer: {fileID: 1451321763}
   ObjectPlacer: {fileID: 28858198}
+  OccupiedPositions: []
 --- !u!114 &1451321761
 MonoBehaviour:
   m_ObjectHideFlags: 0

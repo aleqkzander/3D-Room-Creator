@@ -30,7 +30,7 @@ public class FreeFlowPlayer : MonoBehaviour
 
     private void Rotate()
     {
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(1))
         {
             float mouseX = Input.GetAxis("Mouse X") * MoveSpeed;
             float mouseY = Input.GetAxis("Mouse Y") * MoveSpeed;

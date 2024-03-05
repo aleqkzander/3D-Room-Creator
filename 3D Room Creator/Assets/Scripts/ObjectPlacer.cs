@@ -6,24 +6,33 @@ public class ObjectPlacer : MonoBehaviour
 {
     public GameObject ObjectPlacerMaster;
     public GameObject BasicCubePrefab;
-    public List<GameObject> SpawnedObjects;
     public LineCalculator LineCalculator;
     public TMP_Text LineLengthText;
- 
-    public void CreateBasicCube(Vector3 position)
+
+    [Header("Object tracker")]
+    public List<GameObject> SpawnedObjects;
+    public List<Vector3> OccupiedPositions;
+
+    public void CreateBasicCube(Vector3 gridPosition)
     {
-        Vector3 spawnPosition = new(position.x, position.y + 0.5f, position.z);
+        /*
+         * We add a factor of 0.5f to prevent the cube from clipping into the ground and it't half heigth of the object itself
+         */
+
+        Vector3 spawnPosition = new(gridPosition.x, gridPosition.y + 0.5f, gridPosition.z);
         Quaternion spawnRotation = Quaternion.Euler(0, 180, 0);
 
         GameObject spawnedCube = Instantiate(BasicCubePrefab, spawnPosition, spawnRotation);
         spawnedCube.transform.SetParent(ObjectPlacerMaster.transform);
 
         SpawnedObjects.Add(spawnedCube);
+        OccupiedPositions.Add(spawnedCube.transform.position);
     }
 
     public void DeleteBasicCube(GameObject gameObject)
     {
         SpawnedObjects.Remove(gameObject);
+        OccupiedPositions.Remove(gameObject.transform.position);
         Destroy(gameObject);
     }
 
