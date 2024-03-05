@@ -164,10 +164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectPlacerMaster: {fileID: 28858196}
-  BasicCubePrefab: {fileID: 8973880081678914866, guid: 6ccd510945e58804fa5b1d80624b5b2d, type: 3}
-  SpawnedObjects: []
+  BasicCubePrefab: {fileID: 760727278581412857, guid: 74d25927f4d38ee4dab4b7725ab9aa6c, type: 3}
   LineCalculator: {fileID: 1660839063}
   LineLengthText: {fileID: 100100486}
+  SpawnedObjects: []
+  OccupiedPositions: []
 --- !u!1 &86489436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,7 +3045,6 @@ MonoBehaviour:
   GridPosition: {fileID: 327997782}
   PreviewPlayer: {fileID: 1451321763}
   ObjectPlacer: {fileID: 28858198}
-  OccupiedPositions: []
 --- !u!114 &1451321761
 MonoBehaviour:
   m_ObjectHideFlags: 0

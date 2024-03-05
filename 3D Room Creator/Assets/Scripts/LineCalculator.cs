@@ -5,9 +5,8 @@ public class LineCalculator : MonoBehaviour
 {
     public LineRenderer LineRenderer;
 
-    public int DrawLines(List<GameObject> spawnedObjectsList)
+    public float DrawLines(List<GameObject> spawnedObjectsList)
     {
-        // reset all positions
         LineRenderer.positionCount = 0;
 
         if (spawnedObjectsList.Count < 2)
@@ -18,21 +17,29 @@ public class LineCalculator : MonoBehaviour
 
         foreach (var spawnedObject in spawnedObjectsList)
         {
-            // add new position
             LineRenderer.positionCount++;
-
-            // get current position index
             int currentPositionIndex = LineRenderer.positionCount - 1;
 
-            // create a postion based on the postion data list
             Vector3 linePosition = 
                 new(spawnedObject.transform.position.x, spawnedObject.transform.position.y + 0.5f, spawnedObject.transform.position.z);
 
-            // set the line render position data for current index
             LineRenderer.SetPosition(currentPositionIndex, linePosition);
         }
 
-        // return the length of the linerender counter to determin the line length for each element is 1m
-        return LineRenderer.positionCount;
+        return GetLineLenght() + 1;
+    }
+
+    private float GetLineLenght()
+    {
+        float length = 0f;
+
+        // Iterate through each segment of the line
+        for (int i = 0; i < LineRenderer.positionCount - 1; i++)
+        {
+            // Calculate distance between consecutive points and add to total length
+            length += Vector3.Distance(LineRenderer.GetPosition(i), LineRenderer.GetPosition(i + 1));
+        }
+
+        return length;
     }
 }

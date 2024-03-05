@@ -38,7 +38,7 @@ public class ObjectPlacer : MonoBehaviour
 
     public void DrawLines()
     {
-        int lineLength = LineCalculator.DrawLines(SpawnedObjects);
+        float lineLength = LineCalculator.DrawLines(SpawnedObjects);
 
         if (lineLength == 0)
         {
@@ -49,7 +49,8 @@ public class ObjectPlacer : MonoBehaviour
             LineLengthText.gameObject.SetActive(true); 
         }
 
-        LineLengthText.text = $"Lenght {lineLength}m";
+        if (lineLength < 9) LineLengthText.text = $"Lenght {lineLength}m";
+        else LineLengthText.text = $"Lenght {lineLength:00}m";
     }
 
     public void SaveObjects()
