@@ -1,15 +1,12 @@
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
-using NUnit.Framework.Interfaces;
 
 public class FreeFlowPlayer : MonoBehaviour
 {
     public Slider MotionSpeedSlider;
     public TMP_Text MotionSpeedValueText;
-    public Camera PreviewCamera;
-    public float MoveSpeed = 25f;
-    public float SmoothInterpolation = 0.1f;
+    public float MoveSpeed = 10f;
 
     private void Awake()
     {
@@ -20,42 +17,40 @@ public class FreeFlowPlayer : MonoBehaviour
     private void Update()
     {
         Move();
-    }
 
-    private void FixedUpdate()
-    {
-        Rotate();
+        if (Input.GetMouseButton(1))
+        {
+            Rotate();
+        }
     }
 
     private void Move()
     {
-        Vector2 move = new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Vector3 cameraForward = PreviewCamera.transform.forward;
-        Vector3 cameraRight = PreviewCamera.transform.right;
-        Vector3 moveDirection = cameraForward * move.y + cameraRight * move.x;
-        Vector3 targetPosition = transform.position + MoveSpeed * Time.deltaTime * moveDirection.normalized;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, SmoothInterpolation);
+        // Get input for movement
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        float upDown = Input.GetAxis("Mouse Y");
-        Vector3 verticalMovement = Time.deltaTime * upDown * MoveSpeed * PreviewCamera.transform.up;
+        // Calculate movement vector based on camera's forward direction
+        Vector3 movement = MoveSpeed * Time.deltaTime * verticalInput * Camera.main.transform.forward;
+        movement += horizontalInput * MoveSpeed * Time.deltaTime * transform.right; // Move relative to camera's right
 
-        Vector3 targetVerticalPosition = transform.position + verticalMovement;
-        transform.position = Vector3.Lerp(transform.position, targetVerticalPosition, SmoothInterpolation);
+        // Move the GameObject
+        transform.Translate(movement, Space.World);
     }
 
     private void Rotate()
     {
-        if (Input.GetMouseButton(1))
-        {
-            Vector2 look = new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            look *= MoveSpeed;
+        // Get input for rotation
+        float rotateHorizontal = Input.GetAxis("Mouse X");
+        float rotateVertical = Input.GetAxis("Mouse Y");
 
-            Quaternion targetRotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, look.x, 0f));
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, SmoothInterpolation);
+        // Calculate rotation
+        Vector3 horizontalRotation = (MoveSpeed * 20) * Time.deltaTime * new Vector3(0, rotateHorizontal, 0);
+        Vector3 verticalRotation = (MoveSpeed * 20) * Time.deltaTime * new Vector3(-rotateVertical, 0, 0);
 
-            Quaternion targetCameraRotation = Quaternion.Euler(PreviewCamera.transform.rotation.eulerAngles + new Vector3(-look.y, 0f, 0f));
-            PreviewCamera.transform.rotation = Quaternion.Lerp(PreviewCamera.transform.rotation, targetCameraRotation, SmoothInterpolation);
-        }
+        // Rotate the GameObject
+        transform.Rotate(horizontalRotation, Space.World);
+        Camera.main.transform.Rotate(verticalRotation, Space.Self);
     }
 
     public void Slider_ChangeSpeed()

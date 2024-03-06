@@ -1735,9 +1735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MotionSpeedSlider: {fileID: 141164618}
   MotionSpeedValueText: {fileID: 628967333}
-  PreviewCamera: {fileID: 963194227}
-  MoveSpeed: 25
-  SmoothInterpolation: 0.1
+  MoveSpeed: 10
 --- !u!1 &916704380
 GameObject:
   m_ObjectHideFlags: 0
